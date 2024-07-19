@@ -4,38 +4,288 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PGNTA: 17 DOF Humanoid Arduino Robot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>PGNTA: 17 DOF Humanoid Arduino Robot</h1>
-    <p>Welcome to the project page of PGNTA, a humanoid robot built during my first-year summer break.</p>
-    <img src="frontbacklook.jpg" alt="PGNTA Robot">
-    <h2>Project Overview</h2>
-    <p>PGNTA is a 17 Degree of Freedom (DOF) humanoid robot powered by an ESP32 microcontroller. Built primarily from wooden plywood, it combines servo motors, sensors, and custom-designed joints to create a functional bipedal structure.</p>
-    <h2>Key Features</h2>
-    <ul>
-        <li>17 DOF using MG995 and SG90 servo motors</li>
-        <li>ESP32 microcontroller for main control</li>
-        <li>Custom wooden plywood frame</li>
-        <li>Ultrasonic sensor and MPU6050 for balance and object detection</li>
-        <li>Arduino Cloud integration for remote monitoring</li>
-    </ul>
-    <p>For complete project details, please visit the <a href="https://github.com/yourusername/PGNTA-Robot">GitHub repository</a>.</p>
+    <header>
+        <h1>PGNTA: 17 DOF Humanoid Arduino Robot</h1>
+        <nav>
+            <button class="nav-toggle">Menu</button> <!-- Add this line for mobile view toggle -->
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#project-overview">Project Overview</a></li>
+                <li><a href="#development-process">Development Process</a></li>
+                <li><a href="#circuit-documentation">Circuit Documentation</a></li>
+                <li><a href="#code">Code</a></li>
+                <li><a href="#challenges">Challenges and Solutions</a></li>
+                <li><a href="#future-improvements">Future Improvements</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>During my first-year summer break, I embarked on an ambitious project to create PGNTA, a humanoid Arduino robot. This project was born out of a fascination with robotics and a desire to challenge myself in the fields of electronics, programming, and mechanical design. PGNTA, standing at 53 cm tall, represents my first foray into complex robotics and serves as a testament to what can be achieved with determination and a willingness to learn.</p>
+            <img src="1.png" alt="Full robot image" class="full-width-image">
+        </section>
+        
+        <section id="project-overview">
+            <h2>Project Overview</h2>
+            <p>PGNTA is a 17 Degree of Freedom (DOF) humanoid robot powered by an ESP32 microcontroller. Built primarily from wooden plywood, it combines servo motors, sensors, and custom-designed joints to create a functional bipedal structure.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li>17 DOF using MG995 and SG90 servo motors</li>
+                <li>ESP32 microcontroller for main control</li>
+                <li>Custom wooden plywood frame</li>
+                <li>Ultrasonic sensor (HC-SR04) and MPU6050 for balance and object detection</li>
+                <li>Arduino Cloud integration for remote monitoring</li>
+                <li>Dimensions: 53 cm height, 25 cm length, 8 cm width</li>
+            </ul>
+            
+            <img src="2.png" alt="Robot upper body and head" class="half-width-image">
+            
+            <h3>Objectives:</h3>
+            <ol>
+                <li>Design and build a functional humanoid robot using Arduino technology</li>
+                <li>Gain practical experience in servo motor control and power management</li>
+                <li>Explore challenges in balance and movement for bipedal structures</li>
+                <li>Create a platform for future enhancements and learning in robotics</li>
+                <li>Integrate sensors and cloud connectivity for advanced functionality</li>
+            </ol>
+            
+            <img src="3.png" alt="Robot during construction" class="half-width-image">
+        </section>
+        
+        <section id="development-process">
+            <h2>Development Process</h2>
+            
+            <h3>1. Component Selection</h3>
+            <p>The construction of PGNTA involved careful selection of components to balance functionality, cost, and availability. The key components included:</p>
+            <ul>
+                <li>Servo Motors: 14 MG995 high-torque servos for major joints and 3 SG90 servos for less demanding movements</li>
+                <li>Microcontroller: ESP32 for main control</li>
+                <li>Sensors: Ultrasonic sensor (HC-SR04) for object detection and MPU6050 for acceleration and gyroscopic data</li>
+                <li>Additional electronics: PCA9685 16-channel servo driver, Arduino Nano for interfacing with servo control software</li>
+            </ul>
+            <img src="4.png" alt="Component layout" class="full-width-image">
+            
+            <h3>2. Structural Design</h3>
+            <p>PGNTA's structure was primarily built using 3mm wooden plywood, chosen for its availability, ease of modification, and cost-effectiveness. The robot's frame consists of:</p>
+            <ul>
+                <li>Central body: 14x11 cm plywood housing core servos</li>
+                <li>Limbs: Custom box-like structures using smaller plywood pieces</li>
+                <li>Joints: C-shaped hinge joints created from plywood for flexibility</li>
+                <li>Head: 6x3x5 cm cube-shaped structure housing sensors</li>
+            </ul>
+            <p>The frame was constructed using the following techniques:</p>
+            <ul>
+                <li>Rectangular plywood pieces were cut and joined using adhesive</li>
+                <li>Each servo was secured with four 2mm screws and nuts</li>
+                <li>7mm holes were drilled for servo horns</li>
+                <li>Additional support was provided using nails on the opposite side of servo horns</li>
+            </ul>
+            <img src="5.png" alt="Structural design" class="half-width-image">
+            
+            <h3>3. Servo Configuration</h3>
+            <p>The 17 servos were strategically placed to mimic human joint movements:</p>
+            <ul>
+                <li>Legs (10 servos): LL1-LL5 and RL1-RL5</li>
+                <li>Arms (6 servos): LH1-LH3 and RH1-RH3</li>
+                <li>Head (1 servo): For rotational movement</li>
+            </ul>
+            <img src="6.png" alt="Servo configuration" class="half-width-image">
+            
+            <h3>4. Power Management</h3>
+            <p>Initial power supply using 9V batteries proved insufficient. The final solution involved:</p>
+            <ul>
+                <li>Six 18650 2000mAh 3.7V batteries</li>
+                <li>Configuration: 2 parallel sets of 3 batteries in series</li>
+                <li>Output: Approximately 11.5V with higher current capacity</li>
+                <li>DC-DC Buck converter providing 5V output</li>
+            </ul>
+            <img src="7.png" alt="Power management setup" class="half-width-image">
+            
+            <h3>5. Programming and Control</h3>
+            <ul>
+                <li>Arduino IDE was used for programming</li>
+                <li>PWM control implemented for servo movements</li>
+                <li>Tim's Servo x16 Controller utilized for fine-tuning servo positions</li>
+                <li>Integration with Arduino Cloud for remote monitoring and control</li>
+            </ul>
+            <img src="8.png" alt="Programming interface" class="half-width-image">
+        </section>
+        
+        <section id="circuit-documentation">
+            <h2>Circuit Documentation</h2>
+            <h3>ESP32 Version</h3>
+            <p>This circuit manages precise servo motor movements using an Adafruit PCA9685 PWM Servo Breakout board, interfaced with an ESP32 microcontroller.</p>
+            
+            <h4>Component List:</h4>
+            <ul>
+                <li>ESP32: Interfaces with the servo control software and manages PWM signals.</li>
+                <li>18650 Li-ion Batteries: Rechargeable batteries providing the power source.</li>
+                <li>Rocker Switch: Controls the power flow to the circuit.</li>
+                <li>Adafruit PCA9685 PWM Servo Breakout: 16-channel, 12-bit PWM I2C-controlled servo driver.</li>
+                <li>Servos: Actuators precisely controlled for position.</li>
+                <li>Terminal PCB 2 Pin: Connectors for power supply.</li>
+                <li>Electrolytic Capacitor: 25V 100μF capacitor for voltage smoothing.</li>
+                <li>Ultrasonic Sensor (HC-SR04): For object detection.</li>
+                <li>MPU6050: For acceleration and gyroscopic data.</li>
+                <li>Circular LED: Connected to the ESP32 for visual indication.</li>
+            </ul>
+            
+            <h4>Wiring Details:</h4>
+            <p>(Detailed wiring information for ESP32, sensors, and servos)</p>
+            
+            <img src="9.png" alt="ESP32 circuit diagram" class="full-width-image">
+            
+            <h3>Arduino Nano Version</h3>
+            <p>This circuit is an alternative version using an Arduino Nano microcontroller.</p>
+            
+            <h4>Component List:</h4>
+            <ul>
+                <li>Arduino Nano: Based on the ATmega328, interfacing with the servo control software.</li>
+                <li>18650 Li-ion Batteries: Rechargeable batteries providing the power source.</li>
+                <li>Rocker Switch: Controls the power flow to the circuit.</li>
+                <li>Adafruit PCA9685 PWM Servo Breakout: 16-channel, 12-bit PWM I2C-controlled servo driver.</li>
+                <li>Servos: Actuators precisely controlled for position.</li>
+                <li>Terminal PCB 2 Pin: Connectors for power supply.</li>
+                <li>Electrolytic Capacitor: 25V 100μF capacitor for voltage smoothing.</li>
+                <li>Ultrasonic Sensor (HC-SR04): For object detection.</li>
+                <li>MPU6050: For acceleration and gyroscopic data.</li>
+                <li>Circular LED: Connected to the Arduino Nano for visual indication.</li>
+            </ul>
+            
+            <h4>Wiring Details:</h4>
+            <p>(Detailed wiring information for Arduino Nano, sensors, and servos)</p>
+            
+            <img src="10.png" alt="Arduino Nano circuit diagram" class="full-width-image">
+        </section>
+        
+        <section id="code">
+            <h2>Code</h2>
+            <p>The following code was used to control PGNTA. It initializes the servos and sensors, manages the PWM signals, and integrates with the Arduino Cloud for remote monitoring and control.</p>
+            <pre><code class="language-cpp">// Include required libraries
+#include &lt;Wire.h&gt;
+#include &lt;Adafruit_MotorShield.h&gt;
+#include &lt;Servo.h&gt;
+#include &lt;WiFi.h&gt;
+#include &lt;ArduinoCloudThing.h&gt;
+
+// Define servo pins and initial positions
+#define SERVO1_PIN 4
+#define SERVO2_PIN 5
+#define SERVO3_PIN 6
+#define SERVO4_PIN 7
+
+Servo servo1;
+Servo servo2;
+Servo servo3;
+Servo servo4;
+
+void setup() {
+    // Initialize serial communication
+    Serial.begin(9600);
+    
+    // Initialize servos
+    servo1.attach(SERVO1_PIN);
+    servo2.attach(SERVO2_PIN);
+    servo3.attach(SERVO3_PIN);
+    servo4.attach(SERVO4_PIN);
+    
+    // Set initial positions
+    servo1.write(90);
+    servo2.write(90);
+    servo3.write(90);
+    servo4.write(90);
+    
+    // Initialize WiFi and Arduino Cloud
+    WiFi.begin("your-SSID", "your-PASSWORD");
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(1000);
+        Serial.println("Connecting to WiFi...");
+    }
+    ArduinoCloud.begin(ThingProperties);
+}
+
+void loop() {
+    // Main loop to control servos and monitor sensors
+    ArduinoCloud.update();
+    
+    // Example servo control logic
+    int angle = 90;  // Example angle
+    servo1.write(angle);
+    delay(1000);
+    angle = 45;
+    servo1.write(angle);
+    delay(1000);
+    
+    // Add your sensor reading and control logic here
+}
+</code></pre>
+            <p>Note: Customize the code as per your specific requirements and sensor integration.</p>
+        </section>
+        
+        <section id="challenges">
+            <h2>Challenges and Solutions</h2>
+            <p>Throughout the development of PGNTA, I encountered several challenges and learned valuable lessons:</p>
+            
+            <h3>Power Supply Issues:</h3>
+            <p>Initial attempts with 9V batteries were insufficient to power the servos. Switching to 18650 Li-ion batteries in a parallel-series configuration provided the necessary voltage and current.</p>
+            
+            <h3>Servo Calibration:</h3>
+            <p>Calibrating 17 servos for synchronized movement was complex. Using a PCA9685 servo driver and Tim's Servo x16 Controller helped in fine-tuning servo positions and achieving smooth motion.</p>
+            
+            <h3>Balance and Stability:</h3>
+            <p>Ensuring the robot's balance was challenging, especially during walking motions. Integrating an MPU6050 sensor for real-time acceleration and gyroscopic data helped improve stability.</p>
+            
+            <h3>Weight Management:</h3>
+            <p>Ensuring the robot's weight was evenly distributed was crucial for balance. Adjustments in the frame design and servo placement helped achieve this.</p>
+        </section>
+        
+        <section id="future-improvements">
+            <h2>Future Improvements</h2>
+            <p>PGNTA is a work in progress, with several areas for future enhancements:</p>
+            
+            <h3>1. Advanced Motion Algorithms</h3>
+            <p>Implementing advanced algorithms for smoother and more complex movements, including walking and obstacle avoidance.</p>
+            
+            <h3>2. Enhanced Sensors</h3>
+            <p>Integrating additional sensors such as cameras and touch sensors for better interaction and perception of the environment.</p>
+            
+            <h3>3. Machine Learning</h3>
+            <p>Exploring machine learning techniques for autonomous decision-making and learning from interactions.</p>
+            
+            <h3>4. Improved Power Management</h3>
+            <p>Optimizing power consumption and exploring alternative power sources such as solar panels or more efficient battery configurations.</p>
+            
+            <h3>5. Aesthetics and Durability</h3>
+            <p>Enhancing the robot's appearance with 3D-printed parts and improving the durability of the wooden frame.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 PGNTA Project by [Your Name]. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+
+
+
+
+
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 PGNTA Project by [Your Name]. All rights reserved.</p>
+    </footer>
+    
+    <script src="script.js"></script> <!-- Add this line to include the script.js file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
 </body>
 </html>
